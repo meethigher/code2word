@@ -1,0 +1,36 @@
+{
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "name": "code2word",
+  "version": "0.1.0",
+  "description": "Code2Word - 让高亮的代码完美呈现至 Word",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meethigher/code2word.git"
+  },
+  "keywords": [
+    "代码高亮",
+    "代码转换",
+    "代码格式化",
+    "代码导出",
+    "Word",
+    "代码高亮"
+  ],
+  "author": "meethigher",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/meethigher/code2word/issues"
+  },
+  "homepage": "https://github.com/meethigher/code2word#readme",
+  "dependencies": {
+    "pinia": "^2.3.1",
+    "vue": "^3.2.45"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^3.2.0",
+    "vite": "^3.2.4"
+  }
+}

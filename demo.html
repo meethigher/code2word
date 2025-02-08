@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Highlight.js 自动识别语言 + OL/LI 代码格式</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <style>
+        pre {
+            /*background: #282c34;*/
+            padding: 10px;
+            overflow: auto;
+            border-radius: 5px;
+        }
+
+        ol {
+            counter-reset: line;
+            list-style: none;
+            padding-left: 0px;
+            font-size: 12px;
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+        }
+
+        ol li {
+            counter-increment: line;
+            font-family: monospace;
+            white-space: pre-wrap; /* 让文本换行 */
+            word-wrap: break-word; /* 自动换行，防止溢出 */
+            border-right: 4px solid #87CEEB;
+            border-left: 4px solid #87CEEB;
+        }
+
+        ol li::before {
+            content: counter(line);
+            display: inline-block;
+            width: 2em;
+            margin-right: 1em;
+            text-align: right;
+            color: #888;
+        }
+
+
+        /* 设置偶数行样式 */
+        li:nth-child(even) {
+            background-color: #F6F9FB; /* 偶数行背景色 */
+        }
+
+        /* 设置奇数行样式 */
+        li:nth-child(odd) {
+            background-color: #FDFDFD; /* 奇数行背景色 */
+        }
+
+    </style>
+</head>
+<body>
+<pre><code>hello
+  world</code></pre>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll("pre code").forEach(block => {
+            // 自动检测语言
+            let textContent = block.textContent;
+            let result = hljs.highlightAuto(textContent);
+            let detectedLang = result.language; // 识别的语言
+            console.log(textContent)
+            // 更新代码高亮
+            let highlightedCode = result.value;
+            let lines = highlightedCode.split("\n");
+            let ol = document.createElement("ol");
+
+
+            /**
+             * 奇数行背景色: FDFDFD
+             * 偶数行背景色：F6F9FB
+             */
+            let i = 1;
+            lines.forEach(line => {
+                let li = document.createElement("li");
+                li.innerHTML = line || " "; // 处理空行
+                ol.appendChild(li);
+            });
+
+            // 替换原代码块
+            let pre = block.parentNode;
+            pre.innerHTML = ""; // 清空
+            pre.appendChild(ol);
+
+            // 显示检测到的语言
+            let langLabel = document.createElement("div");
+            langLabel.textContent = `Detected Language: ${detectedLang}`;
+            langLabel.style.color = "#bbb";
+            langLabel.style.fontSize = "12px";
+            langLabel.style.marginBottom = "5px";
+            pre.insertBefore(langLabel, ol);
+        });
+    });
+</script>
+</body>
+</html>

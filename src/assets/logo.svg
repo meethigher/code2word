@@ -1,0 +1,46 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <!-- 定义渐变 -->
+    <defs>
+        <linearGradient id="flowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#4285f4"/>
+            <stop offset="50%" style="stop-color:#34a853"/>
+            <stop offset="100%" style="stop-color:#2b579a"/>
+        </linearGradient>
+        
+        <!-- 背景渐变 -->
+        <radialGradient id="bgGradient">
+            <stop offset="0%" style="stop-color:#ffffff"/>
+            <stop offset="70%" style="stop-color:#e8f0fe"/>
+            <stop offset="100%" style="stop-color:#d2e3fc"/>
+        </radialGradient>
+    </defs>
+
+    <!-- 背景圆形 -->
+    <circle cx="100" cy="100" r="90" fill="url(#bgGradient)"/>
+    
+    <!-- 左侧代码符号 -->
+    <g transform="translate(30, 70)">
+        <rect x="0" y="0" width="50" height="60" rx="5" fill="#4285f4"/>
+        <text x="25" y="35" font-family="Arial" font-size="20" fill="white" text-anchor="middle">&lt;/&gt;</text>
+    </g>
+    
+    <!-- 流向箭头 -->
+    <g transform="translate(85, 90)">
+        <!-- 箭头主体 -->
+        <path d="M0,10 H25 M20,0 L30,10 L20,20" fill="none" stroke="#333" stroke-width="3"/>
+        <!-- 彩色流动效果线条 -->
+        <path d="M5,5 H15 M10,15 H20" stroke="url(#flowGradient)" stroke-width="3" stroke-dasharray="2,2">
+            <animate attributeName="stroke-dashoffset" from="4" to="0" dur="1.5s" repeatCount="indefinite"/>
+        </path>
+    </g>
+    
+    <!-- 右侧Word文档图标 -->
+    <g transform="translate(120, 70)">
+        <!-- 主文档形状 -->
+        <path d="M0,0 h40 l10,10 v50 h-50 v-60" fill="#2b579a"/>
+        <!-- 折角 -->
+        <path d="M40,0 v10 h10" fill="#235393"/>
+        <!-- 白色W字母 -->
+        <text x="25" y="40" font-family="Segoe UI" font-size="24" fill="white" text-anchor="middle" font-weight="bold">W</text>
+    </g>
+</svg>
