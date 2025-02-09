@@ -26,11 +26,13 @@
   },
   "homepage": "https://github.com/meethigher/code2word#readme",
   "dependencies": {
+    "javascript-obfuscator": "^4.1.1",
     "pinia": "^2.3.1",
     "vue": "^3.2.45"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.2.0",
+    "terser": "^5.38.1",
     "vite": "^3.2.4"
   }
 }

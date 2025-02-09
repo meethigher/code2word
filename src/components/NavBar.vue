@@ -5,15 +5,16 @@
       <h1>Code2Word - 让高亮的代码完美呈现至 Word</h1>
     </div>
     <div class="nav-links">
-      <a href="https://meethigher.top" class="link">主页</a>
-      <a href="https://meethigher.top/blog" class="link">博客</a>
-      <a href="https://github.com/meethigher" target="_blank" class="link">GitHub</a>
+      <a :href="Utils.home" class="link">主页</a>
+      <a :href="Utils.blog" class="link">博客</a>
+      <a :href="Utils.github" target="_blank" class="link">GitHub</a>
     </div>
   </nav>
 </template>
 
 <script setup>
 import logo from '@/assets/logo.svg'; // 导入 SVG 文件
+import {Utils} from "@/utils/utils";
 </script>
 
 <style scoped>

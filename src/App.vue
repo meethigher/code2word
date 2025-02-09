@@ -24,6 +24,7 @@ import NavBar from './components/NavBar.vue';
 import CodeEditor from './components/CodeEditor.vue';
 import ControlPanel from './components/ControlPanel.vue';
 import CodePreview from './components/CodePreview.vue';
+import {Utils} from "./utils/utils";
 
 const code = ref('');
 const selectedLang = ref('javascript');
@@ -46,21 +47,11 @@ onUnmounted(() => {
 });
 
 const redirectToPC = () => {
-  window.location.href = 'https://meethigher.top'; // 替换为你想跳转的网址
+  window.location.href = Utils.home; // 替换为你想跳转的网址
 };
 
-console.log("%c@theme：Starry\n" +
-    "@author：Kit Chen\n" +
-    "@link：https://github.com/meethigher/code2word\n" +
-    "@createDate：2025-02-09\n" +
-    "@页面加载耗时：" + (performance.now() / 1000).toFixed(2) + "秒",
-    "font-size:18px; font-weight:bold; color:#24a0f0;");
-console.log("%c开发过程中注意事项:\n" +
-    "1. Word支持通过HTML/RTF进行格式渲染\n" +
-    "2. Word在按行渲染内容时，对于 ol>li、ul>li 比较友好\n" +
-    "3. 剪切板一次复制，内部实际复制了多种格式内容。比如html/text等，可使用CopyQ进行提取\n" +
-    "4. 注意浏览器与Word渲染的差异。就比如white-space: pre-wrap;\n",
-    "font-size:12px; font-weight:bold; color:black;")
+Utils.printProjectInfo();
+Utils.printAttention();
 
 </script>
 

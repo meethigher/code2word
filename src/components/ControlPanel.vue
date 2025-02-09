@@ -1,16 +1,40 @@
 <template>
   <div class="control-panel">
     <button @click="highlightCode">高亮</button>
-    <button @click="toggleOutside">{{ codeStore.outside ? '外部序号' : '内部序号' }}</button>
     <button @click="copyCode" v-show="false">复制</button>
+    <button @click="jsObfuscator">JS混淆</button>
+    <button @click="toggleOutside">{{ codeStore.outside ? '外部序号' : '内部序号' }}</button>
     <button @click="copyDesc">复制说明</button>
   </div>
 </template>
 
 <script setup>
 import {useCodeStore} from '@/global-data-store/codeStore'
+import {Utils} from "@/utils/utils";
+import {obfuscate} from 'javascript-obfuscator';
 
 const codeStore = useCodeStore()
+
+function jsObfuscator() {
+  let rawCode = codeStore.rawCode;
+  if (rawCode) {
+    codeStore.rawCode = obfuscate(
+        rawCode,
+        {
+          compact: true,                      // 紧凑模式，移除多余空格和换行符
+          controlFlowFlattening: true,       // 启用控制流平坦化（极大增强混淆程度）
+          controlFlowFlatteningThreshold: 1, // 100% 启用控制流平坦化
+          numbersToExpressions: true,        // 将数字转换为复杂表达式
+          simplify: false,                    // 关闭代码简化优化
+          stringArrayShuffle: true,          // 乱序字符串数组，提高混淆效果
+          splitStrings: true,                 // 拆分字符串
+          stringArrayThreshold: 1            // 100% 的字符串都进行混淆
+        }
+    ).getObfuscatedCode();
+  } else {
+    alert("请先输入内容");
+  }
+}
 
 const highlightCode = () => {
   if (!codeStore.rawCode) {
@@ -25,9 +49,7 @@ const toggleOutside = () => {
   alert("已切换为" + (codeStore.outside ? "外部序号" : "内部序号") + ", 点击高亮按钮，即可重新渲染");
 }
 const copyDesc = async () => {
-  alert("1. 复制高亮输出区的代码，然后保留原格式粘贴至Word\n" +
-      "2. Word支持内部序号，并不支持外部序号\n" +
-      "3. Word中可鼠标右键-调整列表缩进，进行布局美化\n")
+  Utils.usage();
 };
 const copyCode = async () => {
   try {
